@@ -29,3 +29,5 @@ App.click();
 App = MyReact.render(MyComponent);
 App.type("hello!");
 App = MyReact.render(MyComponent);
+App.click();
+App = MyReact.render(MyComponent);

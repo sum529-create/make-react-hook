@@ -23,13 +23,22 @@ export const useState = (init) => {
 
 export const useEffect = (callback, depArray) => {
   const hasNoDeps = !depArray;
-  const hasChangedDeps = _deps
-    ? !depArray.every((el, i) => el === _deps[i])
+  const prevDeps = hooks[currentHook] ? hooks[currentHook].deps : undefined;
+
+  const prevCleanup = hooks[currentHook]
+    ? hooks[currentHook].cleanup
+    : undefined;
+
+  const hasChangedDeps = prevDeps
+    ? !depArray.every((el, i) => el === prevDeps[i])
     : true;
+
   if (hasNoDeps || hasChangedDeps) {
-    callback();
-    _deps = depArray;
+    if (prevCleanup) prevCleanup();
+    const cleanup = callback();
+    hooks[currentHook] = { deps: depArray, cleanup };
   }
+  currentHook++;
 };
 
 export default MyReact;
