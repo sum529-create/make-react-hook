@@ -18,6 +18,7 @@ export const useState = (init) => {
     hooks[hookIdx] = newState;
   };
   return [hooks[currentHook++], useState];
+  return [hooks[currentHook++], setState];
 };
 
 export default MyReact;
