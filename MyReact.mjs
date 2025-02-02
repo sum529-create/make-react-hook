@@ -21,7 +21,7 @@ export const useState = (init) => {
   return [hooks[currentHook++], setState];
 };
 
-const useEffect = (callback, depArray) => {
+export const useEffect = (callback, depArray) => {
   const hasNoDeps = !depArray;
   const hasChangedDeps = _deps
     ? !depArray.every((el, i) => el === _deps[i])
